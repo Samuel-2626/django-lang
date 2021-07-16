@@ -154,7 +154,7 @@ A .po message file has been created for each language.
 1. msgid: This represents the translation string as it appears in the source code.
 1. msgstr: This represents the language translation, which is empty by default. You will have to supply the actual translation for any given string.
 
-Currently only the `LANGUAGES` from our settings.py file have been marked for translation. Therefore for each msgid under the fr directory enter the French equivalent of the word likewise for the es directory (Spanish equivalent).
+Currently only the `LANGUAGES` from our settings.py file have been marked for translation. Therefore for each msgstr under the **fr** directory enter the French equivalent of the word likewise for the **es** directory (Spanish equivalent).
 
 Next, let's compile the messages by running the following commands.
 
@@ -164,7 +164,7 @@ $ django-admin compilemessages
 
 A .mo compiled message file has been generated for each language.
 
-## Translating fields name
+## Translating templates, fields and forms
 
 We can translate model fields name and forms my marking them for translation using either **gettext** or **gettext_lazy** function.
 
@@ -185,14 +185,30 @@ class Course(models.Model):
         return self.title
 ```
 
-With this function translation only occurs when the value is accessed rather than when the function is called. They are useful when strings marked for translation are in paths that are executed when modules are loaded.
-
 ```bash
-django-admin makemessages --all
-django-admin compilemessages
+$ django-admin makemessages --all
+$ django-admin compilemessages
 ```
 
-You have still not translated anything we just marked them for translation, we can also do this for forms by adding a label. In the next section, we will start translating using a third-party package for simplicity.
+We can also do this for forms by adding a label. For example:
+
+```py
+from django import forms
+from django.utils.translation import gettext_lazy as _
+
+class ExampleForm(forms.Form):
+    first_name = forms.CharField(label=_('first name'))
+```
+
+To translate our templates, Django offers the `{% trans %}` and `{% blocktrans %}` template tags to translate strings. You have to add `{% load i18n %}` at the top of the HTML file in order to use the translation templates tags.
+
+The `{% trans %}` template tag allows you to mark a literal for translation. How it works is that Django executes **gettext** function on the given text internally.
+
+The `{% trans %}` tag is useful for a simple translation strings, but it can't handle content for tanslation that includes variables.
+
+Enter the ``{% blocktrans %}` template tag which allows you to mark content that includes literals and variables.
+
+> Use the {% blocktrans %} tag instead of {% trans %} when you need to include variable context in your HTML file.
 
 ## Using the Rosetta translation interface
 
