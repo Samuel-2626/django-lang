@@ -137,11 +137,9 @@ LOCALE_PATHS = (
 )
 ```
 
-The LOCALE_PATHS setting specifies the directories where Django has to look for translation files. Locale paths that appear first have the highest precedence.
+> Django now looks at the LOCALE_PATHS setting for tanslation files. Note that, Locale paths that appear first have the highest precedence.
 
-When you use the makemessages command from your project directory, messaage files will be generated in the locale/ path you created. However, for applications that contain a locale/ directory, message files will be generated in that directory.
-
-Next, create a new directory inside of your root project called **locale** inside a new folder for each language (en, es and fr).
+You need to create the `locale` directory inside of your root project and a new folder for each language (en, es and fr).
 
 Open the shell and run the following command from your project directory:
 
