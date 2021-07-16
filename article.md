@@ -15,7 +15,7 @@ By the end of this tutorial you should be able to:
 
 ## Project Setup and Overview
 
-This is what you will be creating from this tutorial.
+This is what you will be creating from this tutorial. Though simple but it would cover basic concepts to get you comfortable with adding internationalization with Django.
 
 ![Home Page](https://github.com/Samuel-2626/django-lang/blob/main/images/homepage.png)
 
@@ -269,13 +269,11 @@ Rosetta compiles the message file when you save translations, so there is no nee
 
 > Note that after you add new translations in a production environment you will have to reload your server after running the compilemessages command, or after saving the translations with Rosetta, for changes to take effect.
 
-## Add language prefix to URL patterns
+## Add language prefix to URLs
 
-Django offers internationalization capabilities for URLs. It allow us to serve each language version under a different base URL. A reason for tanslating URLs is to optimize your site for seacrch engines. By adding a language prefix to your patterns, you will be able to index a URL for each language instead of a single URL for all of them. Furthermore, by translating URLs intoeach language, you will provide search engines with URLs that will rank better for each language.
+Django using it's international framework gives us the ability to serve each language version under a different URL extension. For instance, the English version of your site can be severd under **/en/**, the French version can be served under **/fr/** and so on. This approach makes our site optimized for search engines as each URL will be indexed for each language which in turn will rank better for each language. To use this Django international framework needs to identify the current language from the requested URL, therefore, the **LocalMiddleware** needs to be added in the MIDDLEWARE setting of your porject, this has been done before.
 
-Django allows you to add a language prefix to your URL patterns. For examp,e, the English version of your site can be served under a path starting /en/, and the Spanish version under /es/. To use languages in URL patterns, you have to use **LocalMiddleware** provided by Django. The framework will use it to identify the current language from the requested URL. You added it previously to the MIDDLEWARE setting of your project, so you don't need to do it now.
-
-Edit the main `urls.py` file of the `django-lang` project and add `i18n_patterns()`, as follows:
+Edit the main `urls.py` file of the `django-lang` project and add the `i18n_patterns` function:
 
 ```py
 from django.conf.urls.i18n import i18n_patterns
@@ -288,7 +286,9 @@ urlpatterns = i18n_patterns(
 )
 ```
 
-Run the development server and open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser. you will be redirectd to the requested URL, including the language prefix. Take a look at the URL in your browser; it should now look like [http://127.0.0.1:8000/en/](http://127.0.0.1:8000/en/)
+Run the development server and open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser. you will be redirectd to the requested URL, including the language prefix. Take a look at the URL in your browser; it should now look like [http://127.0.0.1:8000/en/](http://127.0.0.1:8000/en/).
+
+> Change the requested URL from **en** to **fr** or to **es** and see as the heading changes.
 
 ## Translating our models
 
@@ -494,13 +494,3 @@ You can see that decimal numbers in the English version of youe site are display
 ## Conclusion
 
 Grab the complete code from the [repo](https://github.com/Samuel-2626/django-lang).
-
-## Addition:
-
-Translating URL pattenrs
-
-Django support tanslated strings in URL patterns. You can use a different translation for each language for a single URL pattern. You can mark URL patterns for translation in the same way as you would with literals, using the gettext_lazy() function.
-
-Open the shell and run the next command to update the message files with the new translations:
-
-django-admin makemessages --all
