@@ -149,16 +149,20 @@ django-admin makemessages --all
 
 A .po message file has been created for each language.
 
-What to know?
+**What to know?**
 
-1. msgid: The translation string as it appears in the source code.
-1. msgstr: The language translation, which is empty by default. This is where you have to enter the actual translation for the given string.
+1. msgid: This represents the translation string as it appears in the source code.
+1. msgstr: This represents the language translation, which is empty by default. You will have to supply the actual translation for any given string.
+
+Currently only the `LANGUAGES` from our settings.py file have been marked for translation. Therefore for each msgid under the fr directory enter the French equivalent of the word likewise for the es directory (Spanish equivalent).
+
+Next, let's compile the messages by running the following commands.
 
 ```bash
 django-admin compilemessages
 ```
 
-You can see that a .mo compiled message file has been generated for each language.
+A .mo compiled message file has been generated for each language.
 
 ## Translating fields name
 
