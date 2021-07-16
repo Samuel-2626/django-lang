@@ -217,14 +217,14 @@ Enter the ``{% blocktrans %}` template tag which allows you to mark content that
 
 > Use the {% blocktrans %} tag instead of {% trans %} when you need to include variable context in your HTML file.
 
-Update the ``index.html` file inside the templates folder to see this in action:
+Update the `index.html` file inside the templates folder to see this in action:
 
 ```html
+<!-- # new -->
 <title>{% trans "TestDriven.io" %}</title>
-<!-- # new -->
 
-<h1>{% "TestDriven.io Courses" %}</h1>
 <!-- # new -->
+<h1>{% "TestDriven.io Courses" %}</h1>
 ```
 
 ```bash
@@ -237,15 +237,14 @@ Fill in the following **msgstr** translations for the French and Spanish directo
 $ django-admin compilemessages
 ```
 
-## Using the Rosetta translation interface
+## Using Rosetta Translation Interface
 
-We will be using a third-party library called **Rosseta**. Rosetta is a third-party application that allows you to edit translations using the same interface as the Django administration site. Rosetta makes it easy to edit .po files and it updates compiled translation files.
+We will be using a third-party library called **Rosseta**. Rosetta is a third-party application that allows you to edit translations using the same interface as the Django administration site. It makes it easy to edit .po files and it updates compiled translation files automatically for you.
 
 Rosseta as already been installed as part of the dependencies, therefore, all you need to do is to add it as part of your installed apps
 
 ```py
 INSTALLED_APPS = [
-
     'rosetta', # new
 ]
 ```
@@ -256,7 +255,7 @@ You will also need to add Rosetta's URL to your main URL configuration. Edit the
 path('rosetta/', include('rosetta.urls')), # new
 ```
 
-Navigate the to [http://127.0.0.1:8080/rosetta/](http://127.0.0.1:8080/rosetta/) in your browser.
+Navigate to [http://127.0.0.1:8080/rosetta/](http://127.0.0.1:8080/rosetta/) in your browser.
 
 ![Rosetta Homepage](https://github.com/Samuel-2626/django-lang/blob/main/images/rosetta-homepage.png)
 
@@ -266,7 +265,7 @@ When you finish editing translations, click the **Save and translate next block*
 
 Rosetta compiles the message file when you save translations, so there is no need for you to run the compilemessages command.
 
-Note that when you add new translations to your production environment, if you server Django with a real web server, you will have to reload your server after running the compilemessages command, or after saving the translations with Rosetta, for changes to take effect.
+> Note that when you add new translations to your production environment, if you server Django with a real web server, you will have to reload your server after running the compilemessages command, or after saving the translations with Rosetta, for changes to take effect.
 
 ## Add language prefix to URL patterns
 
