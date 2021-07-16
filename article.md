@@ -164,7 +164,7 @@ $ django-admin compilemessages
 
 A .mo compiled message file has been generated for each language.
 
-## Translating templates, fields and forms
+## Translating templates, model fields and forms
 
 We can translate model fields name and forms my marking them for translation using either **gettext** or **gettext_lazy** function.
 
@@ -402,17 +402,13 @@ For each data, a separate field for each language is created. Add the different 
 
 ![Admin 2](https://github.com/Samuel-2626/django-lang/blob/main/images/admin-2.png)
 
-## Translating Templates
+## Allowing users to switch languages
 
-Django offers the {% trans %} and {% blocktrans %} template tags to translate strings in templates. In order to use the translation template tags, you have to add {% load i18n %} at the top of your template to load them.
+Since you are serving content that is available in multiple languages, you should let users switch the sites language.
 
-The {% trans %} template tag allows you to mark a literal for translation. Internally Django executes gettext() on the given text.
+You are going to add a language selector to your site. The language selector will consist of a list of available languages displayed using links.
 
-The {% trans %} tag is useful for a simple translation strings, but it can't handle content for tanslation that includes variables.
-
-The {% blocktrans %} template tag allows you to mark content that includes literals and variable contenr using placeholders.
-
-Use the {% blocktrans %} tag instead of {% trans %} when you need to include variable content in your translation string.
+Edit the `index.html` file:
 
 ```html
 {% load i18n %}
@@ -429,11 +425,31 @@ Use the {% blocktrans %} tag instead of {% trans %} when you need to include var
 			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 			crossorigin="anonymous"
 		/>
-		<title>Company</title>
+		<title>{% trans "TestDriven.io" %}</title>
+        <style>
+            h1, h3 {
+                color: tomato;
+            }
+            li {
+                display: inline;
+                text-decoration: none;
+                padding: 5px;
+            }
+            a {
+                text-decoration: none;
+                color: brown;
+            }
+            .active {
+                background-color: tomato;
+                padding: 2px;
+                text-align: center;
+                border-radius: 5px;
+            }
+        </style>
 	</head>
 	<body>
 		<div class="container">
-			<h1>{% trans "Top Tech Companies" %}</h1>
+			<h1>{% trans "TestDriven.io Courses" %}</h1>
 
 			{% get_current_language as LANGUAGE_CODE %}
 			{% get_available_languages as LANGUAGES %}
@@ -444,23 +460,22 @@ Use the {% blocktrans %} tag instead of {% trans %} when you need to include var
 				{% for language in languages %}
 					<li>
 					<a href="/{{ language.code }}/"
-					{% if language.code == LANGUAGE_CODE %} class="selected"{% endif %}>
+					{% if language.code == LANGUAGE_CODE %} class="active"{% endif %}>
 						{{ language.name_local }}
 					</a>
 					</li>
 				{% endfor %}
 				</ul>
 
-			{% for company in companies %}
+			{% for course in courses %}
 			<h3>
-				{% blocktrans with code=company %}
-
-						{{ code }} -
-				{% endblocktrans %}
-
-				<em style="font-size: small">{{ company.founded }}</em>
+                {{ course.title }}
+				<em style="font-size: small">{{ course.date }}</em>
 			</h3>
-			<p>{{ company.description }}</p>
+			<p>{{ course.description }}</p>
+            <strong>
+                Price: $ {{ course.price }}
+            </strong>
 			<hr />
 			{% empty %}
 			<p>Database is empty</p>
@@ -470,17 +485,9 @@ Use the {% blocktrans %} tag instead of {% trans %} when you need to include var
 </html>
 ```
 
-## Allowing users to switch languages
+> Make sure that no template tag is split into multiple lines.
 
-Since you are serving content that is available in multiple languages, you should let users switch the sites language.
-
-You are going to add a language selector to your site. The language selector will consist of a list of available languages displayed using links.
-
-....
-
-Make sure that no template tag is split into multiple lines.
-
-What's happening here?
+**What's happening here?**
 
 1. load the internationaliation tags using {% load i18n %}
 1. You use the {% get_current_language %} tag to retrieve the current language.
@@ -497,5 +504,7 @@ When `USE_L10N` is enabled, Django will try to use a locale-specific format when
 You can see that decimal numbers in the English version of youe site are displayed witha dot separator for decimal places, while in the Spanish version, they are displayed using a comma. This is due to the locale formats specified for the es locale by Django.
 
 ## Conclusion
+
+In this tutorial you learnt about internationzalization and localization. How to make strings for translation. We also used third-party packages like Rosetta to make updating and compiling message files easy and django-parler to tanslate our models.
 
 Grab the complete code from the [repo](https://github.com/Samuel-2626/django-lang).
