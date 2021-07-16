@@ -325,15 +325,17 @@ PARLER_LANGUAGES = {
 
 You defined the available languages (English, French, Spanish) for `django-parler`. You also specify English to be the default language and finally indicate that `django-parler` should not hide untranslated content.
 
-**django_parler** provides a TranslatableModel model class and a TranslatedFields wrapper to translate model fields.
+**What to know?**
 
-**django_parler** manages translations by generating another model for each translatable model.
+1. `django_parler` provides a **TranslatableModel** model class and a **TranslatedFields** wrapper to translate model fields.
 
-Since, Django uses a separate table for translations, then are some features that you can't use.
+1. `django_parler` manages translations by generating another model for each translatable model.
 
-**django_parler** integrates smoothly with the Django administration site. It includes a TranslatableAdmin class that overrides the ModelAdmin class provided by Django to manage translations.
+> Since, Django uses a separate table for translations, then are some features that you can't use.
 
-It's important to note that this migration deletes the previous existing fields from your models.
+1. `django_parler` integrates smoothly with the Django administration site. It includes a **TranslatableAdmin** class that overrides the ModelAdmin class provided by Django to manage translations.
+
+Note that this migration deletes the previous existing fields from your models.
 
 ```py
 from django.db import models
