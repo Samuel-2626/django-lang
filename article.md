@@ -65,7 +65,7 @@ In the next section, we will be discussing briefly about **Internationalization*
 
 Recall that Django using its international framework has being translated into more than 50 languages.
 
-Through the international framework, we can easily mark strings for translation, both in Python code and in our templates. It makes use of GNU gettext toolkit to generate and manage a plain text file that represents a language known as the **message file**. The message file ends with `.po` as its extension. Another file is generated for each language once translation is done which ends with the `.mo` extension. This is known as the compiled translation.
+> Through the international framework, we can easily mark strings for translation, both in Python code and in our templates. It makes use of GNU gettext toolkit to generate and manage a plain text file that represents a language known as the **message file**. The message file ends with `.po` as its extension. Another file is generated for each language once translation is done which ends with the `.mo` extension. This is known as the compiled translation.
 
 To use this gettext toolkit, it needs to be installed. On macOS a simple way is to install it using [Homebrew](https://brew.sh/), by running the following commands.
 
@@ -127,9 +127,11 @@ MIDDLEWARE = [
 
 This middleware is used to determine the current language based on the request data.
 
-Create a locale path direcotry. The locale directory is the place where message files for your application will reside. Edit the settings.py file again and add the following settings to it:
+Add a locale path direcotry for your application where message files will reside.
 
 ```py
+import os
+
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
 )
