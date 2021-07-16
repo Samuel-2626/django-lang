@@ -296,7 +296,7 @@ Django internationalization framework doesn't support translating our models out
 
 **How does it work?**
 
-`django-parler` generates a separate database table for each model that contains translations. This table includes all the translated fields and a foreign key for the original object that the translation belongs to. It also contains a language field, since each row stores the content for a single language.
+`django-parler` will create a separate database table for each model that contains translations. This table includes all the translated fields. It also as a foreign key to link to the original object.
 
 `django-parler` as already been installed as part of the dependencies, therefore, all you need to do is to add it as part of your installed apps
 
@@ -323,7 +323,7 @@ PARLER_LANGUAGES = {
 }
 ```
 
-The setting defines the available languages, en and es, for `django-parler`. You specify the default language `en` and indicate that `django-parler` should not hide untranslated content.
+You defined the available languages (English, French, Spanish) for `django-parler`. You also specify English to be the default language and finally indicate that `django-parler` should not hide untranslated content.
 
 **django_parler** provides a TranslatableModel model class and a TranslatedFields wrapper to translate model fields.
 
