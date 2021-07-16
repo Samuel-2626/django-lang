@@ -70,8 +70,8 @@ Recall that Django using its international framework has being translated into m
 To use this gettext toolkit, it needs to be installed. On macOS a simple way is to install it using [Homebrew](https://brew.sh/), by running the following commands.
 
 ```bash
-brew install gettext
-brew link --force gettext
+$ brew install gettext
+$ brew link --force gettext
 ```
 
 For most Linux distributions, it comes pre-installed. And finally for Windows, the steps to install can be found [here](https://djangoproject.com/en/3.0/topics/i18n/translation/#gettext-on-windows).
@@ -144,7 +144,7 @@ You need to create the `locale` directory inside of your root project and a new 
 Open the shell and run the following command from your project directory:
 
 ```bash
-django-admin makemessages --all
+$ django-admin makemessages --all
 ```
 
 A .po message file has been created for each language.
@@ -159,7 +159,7 @@ Currently only the `LANGUAGES` from our settings.py file have been marked for tr
 Next, let's compile the messages by running the following commands.
 
 ```bash
-django-admin compilemessages
+$ django-admin compilemessages
 ```
 
 A .mo compiled message file has been generated for each language.
