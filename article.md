@@ -187,6 +187,11 @@ class Course(models.Model):
 
 ```bash
 $ django-admin makemessages --all
+```
+
+Fill in the following **msgstr** translations for the French and Spanish directory and then compile the messages
+
+```bash
 $ django-admin compilemessages
 ```
 
@@ -211,6 +216,26 @@ The `{% trans %}` tag is useful for a simple translation strings, but it can't h
 Enter the ``{% blocktrans %}` template tag which allows you to mark content that includes literals and variables.
 
 > Use the {% blocktrans %} tag instead of {% trans %} when you need to include variable context in your HTML file.
+
+Update the ``index.html` file inside the templates folder to see this in action:
+
+```html
+<title>{% trans "TestDriven.io" %}</title>
+<!-- # new -->
+
+<h1>{% "TestDriven.io Courses" %}</h1>
+<!-- # new -->
+```
+
+```bash
+$ django-admin makemessages --all
+```
+
+Fill in the following **msgstr** translations for the French and Spanish directory and then compile the messages
+
+```bash
+$ django-admin compilemessages
+```
 
 ## Using the Rosetta translation interface
 
