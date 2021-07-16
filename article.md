@@ -6,16 +6,16 @@ Django offers multiple language support. In fact, Django is translated into more
 
 By the end of this tutorial you should be able to:
 
-1. understand the difference between internationalization and localization.
-1. add language prefix to URL patterns.
+1. understand the difference between internationalization and localization
+1. add language prefix to URLs
 1. translate templates
-1. allow users to switch between languages.
-1. translate models.
-1. add locale-support.
+1. allow users to switch between languages
+1. translate models
+1. add locale-support
 
 ## Project Setup and Overview
 
-This is what you will be aiming to achieve from this tutorial.
+This is what you will be creating from this tutorial.
 
 ![Home Page](https://github.com/Samuel-2626/django-lang/blob/main/images/homepage.png)
 
@@ -61,7 +61,7 @@ In the next section, we will be discussing briefly about **Internationalization*
 
 ## Internationalization vs localization
 
-`Internationalization` and `localization` are rather two different terms. While **internationalization** (i18n) enables our web application to be language agnostic (i.e it isn't hard wired to a particular language), but can be used by different languages and locales, **localization** (l10n) on the other hand is the process of translating our web application to a particular language and locale.
+**Internationalization** and **localization** are rather two different terms. While **internationalization** represented by i18n enables our web application to be language agnostic (i.e it isn't hard wired to any particular language), but can be used by different languages and locales, **localization** represented by l10n on the other hand is the process of translating our web application to a particular language and locale.
 
 Recall that `Django` using its international framework has being translated into more than 50 languages.
 
