@@ -271,7 +271,7 @@ Rosetta compiles the message file when you save translations, so there is no nee
 
 ## Add language prefix to URLs
 
-Django using it's international framework gives us the ability to serve each language version under a different URL extension. For instance, the English version of your site can be severd under **/en/**, the French version can be served under **/fr/** and so on. This approach makes our site optimized for search engines as each URL will be indexed for each language which in turn will rank better for each language. To use this Django international framework needs to identify the current language from the requested URL, therefore, the **LocalMiddleware** needs to be added in the MIDDLEWARE setting of your porject, this has been done before.
+Django using it's internationalization framework gives us the ability to serve each language version under a different URL extension. For instance, the English version of your site can be severd under **/en/**, the French version can be served under **/fr/** and so on. This approach makes our site optimized for search engines as each URL will be indexed for each language which in turn will rank better for each language. To use this Django internationalization framework needs to identify the current language from the requested URL, therefore, the **LocalMiddleware** needs to be added in the MIDDLEWARE setting of your porject, this has been done before.
 
 Edit the main `urls.py` file of the `django-lang` project and add the `i18n_patterns` function:
 
@@ -292,12 +292,13 @@ Run the development server and open [http://127.0.0.1:8000/](http://127.0.0.1:80
 
 ## Translating our models
 
-Django doesn't not support translating our models out of box, therefore we will be using a third-party library called `django-parler`. This package is one of the most popular plugins that allows us to translate our models.
+Django internationalization framework doesn't support translating our models out of box, therefore we will be using a third-party library called `django-parler`. There are plethora number of plugins that performs this function, however, this is one of the most popular plugins that allows us to translate our models.
 
-How does it work?
+**How does it work?**
+
 `django-parler` generates a separate database table for each model that contains translations. This table includes all the translated fields and a foreign key for the original object that the translation belongs to. It also contains a language field, since each row stores the content for a single language.
 
-Edit the settings.py file of your project and add `parler` to the INSTALLED_APPS setting, as follows:
+`django-parler` as already been installed as part of the dependencies, therefore, all you need to do is to add it as part of your installed apps
 
 ```py
 INSTALLED_APPS = [
