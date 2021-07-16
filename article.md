@@ -63,7 +63,7 @@ In the next section, we will be discussing briefly about **Internationalization*
 
 **Internationalization** and **localization** are rather two different terms. While **internationalization** represented by i18n enables our web application to be language agnostic (i.e it isn't hard wired to any particular language), but can be used by different languages and locales, **localization** represented by l10n on the other hand is the process of translating our web application to a particular language and locale.
 
-Recall that `Django` using its international framework has being translated into more than 50 languages.
+Recall that Django using its international framework has being translated into more than 50 languages.
 
 Through the international framework, we can easily mark strings for translation, both in Python code and in our templates. It makes use of GNU gettext toolkit to generate and manage a plain text file that represents a language known as the **message file**. The message file ends with `.po` as its extension. Another file is generated for each language once translation is done which ends with the `.mo` extension. This is known as the compiled translation.
 
@@ -78,7 +78,7 @@ For most Linux distributions, it comes pre-installed. And finally for Windows, t
 
 In the next section, we will be preparing our project for internationalization and localization.
 
-## Preparing your project for internationalization
+## Preparing your project to use Django Internationalization Framework
 
 Django comes with some default settings when we created a new project. This can be found inside the `settings.py` file of our project under the **internationalization** section.
 
@@ -88,9 +88,9 @@ The first setting is the `LANGUAGE_CODE`. By default, Django set it's to the Uni
 LANGUAGE_CODE = 'en' # new
 ```
 
-You also have `USE_I18N`, `USE_L10N`, `USE_TZ` all set default to **True** i.e. Django's translation system is enabled, Localized format is enabled and Django is timezone aware respecitvely.
+Others includes the `USE_I18N`, `USE_L10N`, `USE_TZ` all set by default to **True** i.e. Django's translation system is enabled, Localized format is enabled and Django is timezone aware respecitvely. Since they are all set to True no changes needs to be made.
 
-You will be adding a few additional settings to complement the existing ones:
+Let's add some additional settings to complement the existing ones:
 
 ```py
 from django.utils.translation import gettext_lazy as _
@@ -102,7 +102,7 @@ LANGUAGES = (
 )
 ```
 
-What's happening here?
+**What's happening here?**
 
 1. We are specifying the languages we want our project to be available in. If this is not specified Django will assume our project to be available in all of it's supported languages.
 
