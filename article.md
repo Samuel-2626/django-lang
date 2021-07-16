@@ -259,13 +259,15 @@ Navigate to [http://127.0.0.1:8080/rosetta/](http://127.0.0.1:8080/rosetta/) in 
 
 ![Rosetta Homepage](https://github.com/Samuel-2626/django-lang/blob/main/images/rosetta-homepage.png)
 
+Under the projects, click on each application to edit translations.
+
 ![Rosetta French](https://github.com/Samuel-2626/django-lang/blob/main/images/rosetta-french.png)
 
 When you finish editing translations, click the **Save and translate next block** button to save the translations to the .po file.
 
 Rosetta compiles the message file when you save translations, so there is no need for you to run the compilemessages command.
 
-> Note that when you add new translations to your production environment, if you server Django with a real web server, you will have to reload your server after running the compilemessages command, or after saving the translations with Rosetta, for changes to take effect.
+> Note that after you add new translations in a production environment you will have to reload your server after running the compilemessages command, or after saving the translations with Rosetta, for changes to take effect.
 
 ## Add language prefix to URL patterns
 
