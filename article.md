@@ -333,9 +333,7 @@ You defined the available languages (English, French, Spanish) for `django-parle
 
 > Since, Django uses a separate table for translations, then are some features that you can't use.
 
-1. `django_parler` integrates smoothly with the Django administration site. It includes a **TranslatableAdmin** class that overrides the ModelAdmin class provided by Django to manage translations.
-
-Note that this migration deletes the previous existing fields from your models.
+Note also that this migration deletes the previous existing fields from your models.
 
 ```py
 from django.db import models
@@ -360,25 +358,27 @@ Next, apply makemigraions :
 $ python manage.py makemigrations
 ```
 
-However, Edit the file migrations/002_translations.py of the course application and replace the two occurences of the following line:
+However, edit the file migrations/002_translations.py of the course application and replace this code:
 
 ```py
-bases = (parler.models.TranslatableFieldsModelMixin, models.Model)
+bases = (parler.models.TranslatableFieldsModelMixin, models.Model) # old
 ```
 
 with the following one:
 
 ```py
-bases = (parler.models.TranslatableModel, models.Model)
+bases = (parler.models.TranslatableModel, models.Model) # new
 ```
 
-This is a fix for a minor issue found in the django-parler version you are using. This change is necessary to prevent the migration from failing when applying it.
+> This is a fix for a minor issue found in the django-parler version. This change is necessary to prevent the migration from failing when applying it.
 
 Next, apply migrations :
 
 ```bash
 $ python manage.py migrate
 ```
+
+`django_parler` integrates smoothly with the Django administration site. It includes a **TranslatableAdmin** class that overrides the ModelAdmin class provided by Django to manage translations. Therefore edit the `admin.py` of the course directory.
 
 ```py
 from django.contrib import admin
@@ -388,7 +388,7 @@ from .models import Course
 admin.site.register(Course, TranslatableAdmin)
 ```
 
-Run the following management command to add some data to your databasee:
+Run the following management command to add some data again to your databasee:
 
 ```bash
 $ python manage.py add_courses
@@ -397,6 +397,8 @@ $ python manage.py add_courses
 Navigate the to [http://127.0.0.1:8080/admin/](http://127.0.0.1:8080/admin/) in your browser.
 
 ![Admin 1](https://github.com/Samuel-2626/django-lang/blob/main/images/admin-1.png)
+
+For each data, a separate field for each language is created. Add the different translations for each languages and save it.
 
 ![Admin 2](https://github.com/Samuel-2626/django-lang/blob/main/images/admin-2.png)
 
