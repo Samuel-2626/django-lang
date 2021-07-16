@@ -8,10 +8,10 @@ By the end of this tutorial you should be able to:
 
 1. understand the difference between internationalization and localization.
 1. add language prefix to URL patterns.
-1. translating templates
-1. allow users to switch languages.
-1. translating models.
-1. format localization.
+1. translate templates
+1. allow users to switch between languages.
+1. translate models.
+1. add locale-support.
 
 ## Project Setup and Overview
 
