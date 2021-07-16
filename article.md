@@ -497,6 +497,8 @@ Edit the `index.html` file to look like this:
 
 Navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser to see the changes. Switch between the multiple languages and also note how the URL prefix changes for each language. In the next section, we will wrap up this tutorial by taking a look at locale-specific-support
 
+![Home Page](https://github.com/Samuel-2626/django-lang/blob/main/images/homepage-2.png)
+
 ## Add Locale-Support
 
 In the previous section, you have seen localization. When `USE_L10N` is enabled which is enabled by default, Django will try to use a locale-specific format whenever it outputs a value in a template. Therefore, dates, times and numbers will be in different formats based on the user's locale.
