@@ -106,11 +106,11 @@ LANGUAGES = (
 
 1. We are specifying the languages we want our project to be available in. If this is not specified Django will assume our project to be available in all of it's supported languages.
 
-1. This LANGUAGE setting contains two tuples that consist of a language code and a name. Recall that the language codes can be locale-specific, such as **en-gb** or generic such as **en**.
+1. This LANGUAGE setting consist of the language code and the language name. Recall that the language codes can be locale-specific, such as **en-gb** or generic such as **en**.
 
-1. Also, take note of the imports we will be using the **gettext_lazy** function to mark strings for translation. When using the lazy function, strings are translated when the value is accessed, rather than when the function is called. They are useful when strings marked for translation are in paths that are executed when modules are loaded.
+1. Also, take note of the imports we will be using the **gettext_lazy** function to tanslate the language names instead of the **gettext** function. This therefore prevents circular imports.
 
-Add `django.middleware.locale.LocaleMiddleware` to the MIDDLEWARE setting. Make sure that this middleware comes after SessionMiddleware because LocaleMiddleware needs to use session data. It also has to be placed before CommonMiddleware because the latter needs an active language to resolve the requested URL. The MIDDLEWARE setting should now look as follows:
+Add `django.middleware.locale.LocaleMiddleware` to the MIDDLEWARE settings list. This middleware should come after the SessionMiddleware because the LocaleMiddleware needs to use the session data. It should also be placed before the CommonMiddleware because of the CommonMiddleware nedds will be needing active language to resolve the URLs been requested. Hence, the order is very crucial.
 
 ```py
 MIDDLEWARE = [
@@ -173,13 +173,15 @@ from django.utils.translation import gettext_lazy as _
 
 class Course(models.Model):
     title = models.CharField(_('title'), max_length=90)
-    description = models.TextField(_('descriptio'))
+    description = models.TextField(_('description'))
     date = models.DateField(_('date'))
     price = models.DecimalField(_('price'), max_digits=10, decimal_places=2)
 
     def __str__(self):
         return self.title
 ```
+
+With this function translation only occurs when the value is accessed rather than when the function is called. They are useful when strings marked for translation are in paths that are executed when modules are loaded.
 
 ```bash
 django-admin makemessages --all
