@@ -190,7 +190,9 @@ $ django-admin makemessages --all
 $ django-admin compilemessages
 ```
 
-We can also do this for forms by adding a label. For example:
+We can also do this for forms by adding a label.
+
+For instance:
 
 ```py
 from django import forms
