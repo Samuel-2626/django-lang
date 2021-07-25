@@ -28,7 +28,7 @@ $ git clone https://github.com/Samuel-2626/django-lang --branch base --single-br
 $ cd django-lang
 ```
 
-Next, create and activate a virtual environment, install the project's dependencies, apply migrations, and and create a superuser:
+Next, create and activate a virtual environment, install the project's dependencies, apply migrations, and create a superuser:
 
 ```bash
 $ python3.9 -m venv env
@@ -67,20 +67,20 @@ In the next section, we'll look briefly at internationalization and localization
 
 ## Internationalization vs Localization
 
-Internationalization and localization represent two sides to the same coin. Together, they allow you to deliver you web application's content to different locales:
+Internationalization and localization represent two sides to the same coin. Together, they allow you to deliver your web application's content to different locales:
 
-- Internationalization, represented by i18n (18 is the number of letters between i and n), is the processing of developing your application so that it can be used by different locales. This process is generally handled by developers.
-- Localization, represented by l10n (10 is the number of letters between l and n), on the other hand, is the process of translating your application to a particular language and locale. This is generally handled by translators.
+-   Internationalization, represented by i18n (18 is the number of letters between i and n), is the processing of developing your application so that it can be used by different locales. This process is generally handled by developers.
+-   Localization, represented by l10n (10 is the number of letters between l and n), on the other hand, is the process of translating your application to a particular language and locale. This is generally handled by translators.
 
 > For more, review [Localization vs. Internationalization](https://www.w3.org/International/questions/qa-i18n) from W3C.
 
-Recall that Django using its internationalization framework has been translated into more than 100 languages:
+Recall that Django using its [internationalization framework](https://github.com/django/django/tree/main/django/utils/translation) has been translated into more than 100 languages:
 
-TODO: can you provide a link to the "internationalization framework"?
+TODO: can you provide a link to the "internationalization framework"? Done: By the way, I am not too sure if Django is translated to more than 100 languages...curious how you got that fact :)
 
-> Through the internationalization framework, we can easily mark strings for translation, both in Python code and in our templates. It makes use of the GNU gettext toolkit to generate and manage a plain text file that represents a language known as the **message file**. The message file ends with `.po` as its extension. Another file is generated for each language once the translation is done which ends with the `.mo` extension. This is known as the compiled translation.
+Through the internationalization framework, we can easily mark strings for translation, both in Python code and in our templates. It makes use of the GNU gettext toolkit to generate and manage a plain text file that represents a language known as the **message file**. The message file ends with `.po` as its extension. Another file is generated for each language once the translation is done which ends with the `.mo` extension. This is known as the compiled translation.
 
-TODO: is the above aside a quote from somewhere?
+TODO: is the above aside a quote from somewhere? Yes and No, It was from one of my favourite Django books but I did paraphrase and not quote it verbatim. What are your thoughts on this.
 
 Let's start by installing the [gettext](https://www.gnu.org/software/gettext/) toolkit.
 
@@ -97,7 +97,7 @@ In the next section, we'll prepare our Django project for internationalization a
 
 ## Django's Internationalization Framework
 
-Django comes with some default internationalization settings in the *settings.py* file:
+Django comes with some default internationalization settings in the _settings.py_ file:
 
 ```python
 # Internationalization
@@ -194,7 +194,7 @@ locale
 └── fr
 ```
 
-Open the shell and run the following command from your project directory to create a *.po* message file for each language:
+Open the shell and run the following command from your project directory to create a _.po_ message file for each language:
 
 ```bash
 (env)$ django-admin makemessages --all
@@ -205,24 +205,32 @@ You should now have:
 ```bash
 locale
 ├── en
-│   └── LC_MESSAGES
-│       └── django.po
+│   └── LC_MESSAGES
+│       └── django.po
 ├── es
-│   └── LC_MESSAGES
-│       └── django.po
+│   └── LC_MESSAGES
+│       └── django.po
 └── fr
     └── LC_MESSAGES
         └── django.po
 ```
 
-Take note of one of the *.po* message files:
+Take note of one of the _.po_ message files:
 
 1. `msgid`: represents the translation string as it appears in the source code.
 1. `msgstr`: represents the language translation, which is empty by default. You will have to supply the actual translation for any given string.
 
-Currently, only the `LANGUAGES` from our *settings.py* file have been marked for translation. Therefore, for each `msgstr` under the "fr" and "es" directories, enter the French or Spanish equivalent of the word, respectively.
+Currently, only the `LANGUAGES` from our _settings.py_ file have been marked for translation. Therefore, for each `msgstr` under the "fr" and "es" directories, enter the French or Spanish equivalent of the word manually, respectively. Or better still, you can use [Poedit](https://poedit.net/) to edit translations. According to Poedit it was built to handle tanslation using gettext (PO). Download and install it.
 
-TODO: this is a manual process?
+Next, click on browse files and navigate to each directory for the French and Spanish .po message files:
+
+![Poedit 1](https://github.com/Samuel-2626/django-lang/blob/main/images/poedit_1.png)
+
+Next, double click on each translation after which you can save it. This should automatically update your .po message files.
+
+![Poedit 2](https://github.com/Samuel-2626/django-lang/blob/main/images/poedit_2.png)
+
+TODO: this is a manual process? Found a better way, check above :]
 
 Next, let's compile the messages by running the following commands:
 
@@ -230,18 +238,18 @@ Next, let's compile the messages by running the following commands:
 (env)$ django-admin compilemessages
 ```
 
-A *.mo* compiled message file has been generated for each language:
+A _.mo_ compiled message file has been generated for each language:
 
 ```bash
 locale
 ├── en
-│   └── LC_MESSAGES
-│       ├── django.mo
-│       └── django.po
+│   └── LC_MESSAGES
+│       ├── django.mo
+│       └── django.po
 ├── es
-│   └── LC_MESSAGES
-│       ├── django.mo
-│       └── django.po
+│   └── LC_MESSAGES
+│       ├── django.mo
+│       └── django.po
 └── fr
     └── LC_MESSAGES
         ├── django.mo
@@ -250,11 +258,17 @@ locale
 
 TODO: can you provide a quick summary of what we've accomplished thus far?
 
+**What did we achieve from this section**
+
+You prepped out your Django project for internationalization by adding additional settings to our existing settings.py file. You also create a locale directory where all your files that are marked for translations will reside.
+
+> The most important point to take away from the section is we need to first make strings for translation using either the gettext_lazy or gettext function, before compiling our translations.
+
 ## Translating Templates, Models, and Forms
 
-We can translate model fields names and forms by marking them for translation using either the `gettext` or `gettext_lazy` function:
+You can translate model fields names and forms by marking them for translation using either the `gettext` or `gettext_lazy` function:
 
-Edit the *course/models.py* file like so:
+Edit the _course/models.py_ file like so:
 
 ```python
 from django.db import models
@@ -274,7 +288,7 @@ class Course(models.Model):
 (env)$ django-admin makemessages --all
 ```
 
-Fill in the following `msgstr` translations for French and Spanish, and then compile the messages
+Fill in the following `msgstr` translations for French and Spanish either manually or using the Poedit interface, and then compile the messages
 
 ```bash
 (env)$ django-admin compilemessages
@@ -302,7 +316,7 @@ Enter the ``{% blocktrans %}` template tag which allows you to mark content that
 
 > Use the {% blocktrans %} tag instead of {% trans %} when you need to include variable context in your HTML file.
 
-Update the *course/templates/index.html* file to see this in action:
+Update the _course/templates/index.html_ file to see this in action:
 
 ```html
 <!-- # new -->
@@ -312,7 +326,7 @@ Update the *course/templates/index.html* file to see this in action:
 <h1>{% "TestDriven.io Courses" %}</h1>
 ```
 
-TODO: did you mean to use `blocktrans` here?
+TODO: did you mean to use `blocktrans` here? Nope as per the usecase for both, what I am translating doesn't have a variable.
 
 Don't forget to add `{% load i18n %}` to the top of the file.
 
@@ -328,7 +342,7 @@ Fill in the following `msgstr` translations again and then compile the messages
 
 ## Using Rosetta Translation Interface
 
-We'll be using a third-party library called [Rosetta](https://github.com/mbi/django-rosetta) to edit translations using the same interface as the Django administration site. It makes it easy to edit *.po* files and it updates compiled translation files automatically for you.
+We'll be using a third-party library called [Rosetta](https://github.com/mbi/django-rosetta) to edit translations using the same interface as the Django administration site. It makes it easy to edit _.po_ files and it updates compiled translation files automatically for you.
 
 Rosetta has already been installed as part of the dependencies; therefore, all you need to do is to add it to your installed apps:
 
@@ -338,7 +352,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-You'll also need to add Rosetta's URL to your main URL configuration in *django_lang/urls.py*:
+You'll also need to add Rosetta's URL to your main URL configuration in _django_lang/urls.py_:
 
 ```python
 urlpatterns = [
@@ -348,7 +362,7 @@ urlpatterns = [
 ]
 ```
 
-Create and applythe migrations, and then run the server:
+Create and apply the migrations, and then run the server:
 
 ```bash
 (env)$ python manage.py makemigrations
@@ -364,7 +378,7 @@ Under the projects, click on each application to edit translations.
 
 ![Rosetta French](https://github.com/Samuel-2626/django-lang/blob/main/images/rosetta-french.png)
 
-When you finish editing translations, click the "Save and translate next block" button to save the translations to the respective *.po* file. Rosetta will then compile the message file, so there's no need to manually run the `django-admin compilemessages` command.
+When you finish editing translations, click the "Save and translate next block" button to save the translations to the respective _.po_ file. Rosetta will then compile the message file, so there's no need to manually run the `django-admin compilemessages` command.
 
 > Note that after you add new translations in a production environment, you'll have to reload your server after running the `django-admin compilemessages` command or after saving the translations with Rosetta, for changes to take effect.
 
@@ -372,7 +386,7 @@ When you finish editing translations, click the "Save and translate next block" 
 
 With Django's internationalization framework, you can serve each language version under a different URL extension. For instance, the English version of your site can be served under `/en/`, the French version under `/fr/`, and so on. This approach makes the site optimized for search engines as each URL will be indexed for each language, which in turn will rank better for each language. To do this, the Django internationalization framework needs to identify the current language from the requested URL; therefore, the `LocalMiddleware` needs to be added in the `MIDDLEWARE` setting of your project, which we've already done.
 
-Next, add the `i18n_patterns` function to *django_lang/urls.py*:
+Next, add the `i18n_patterns` function to _django_lang/urls.py_:
 
 Edit the main `urls.py` file of the `django-lang` project and add the `i18n_patterns` function:
 
@@ -391,11 +405,11 @@ urlpatterns = i18n_patterns(
 
 Run the development server again, and navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser. You will be redirected to the requested URL, with the appropriate language prefix. Take a look at the URL in your browser; it should now look like [http://127.0.0.1:8000/en/](http://127.0.0.1:8000/en/).
 
-> Change the requested URL from `en` to `fr` or to `es` and see as the heading changes.
+> Change the requested URL from `en` to `fr` or to `es` and see as the heading and title changes.
 
 ## Translating Models with django-parler
 
-Django's internationalization framework doesn't support translating models out-of-the-box, so we'll use a third-party library called [django-parler](https://github.com/django-parler/django-parler). There are a plethora number of [plugins](https://djangopackages.org/grids/g/model-translation/) that performs this function; however, this is one of more popular ones.
+Django's internationalization framework doesn't support translating models out-of-the-box, so we'll use a third-party library called [django-parler](https://github.com/django-parler/django-parler). There are a plethora number of [plugins](https://djangopackages.org/grids/g/model-translation/) that performs this function; however, this is one of the more popular ones.
 
 **How does it work?**
 
@@ -426,9 +440,9 @@ PARLER_LANGUAGES = {
 }
 ```
 
-Here, you defined the available languages (English, French, Spanish) for `django-parler`. You also specified English as the default language and  indicated that `django-parler` should not hide untranslated content.
+Here, you defined the available languages (English, French, Spanish) for `django-parler`. You also specified English as the default language and indicated that `django-parler` should not hide untranslated content.
 
-TODO: what does "hide untranslated content" mean? Maybe provide a link to the docs?
+TODO: what does "hide untranslated content" mean? Maybe provide a link to the docs? This is it from the docs https://django-parler.readthedocs.io/en/stable/configuration.html#parler-languages. Just noticed that it is even the default behaviour in the first place, so I think that it can be remove; thoughts?
 
 **What to know?**
 
@@ -439,7 +453,7 @@ TODO: what does "hide untranslated content" mean? Maybe provide a link to the do
 
 Also, this migration will delete the previous records in your database.
 
-Update *course/models.py* again to look like this:
+Update _course/models.py_ again to look like this:
 
 ```python
 from django.db import models
@@ -476,7 +490,7 @@ With the following one:
 bases = (parler.models.TranslatableModel, models.Model)
 ```
 
-> There happens to be a minor issue found in django-parler that we just resolved. Failing to do this will prevent migrations from applying. TODO: can you provide a link to the issue?
+> There happens to be a minor [issue](https://github.com/django-parler/django-parler/issues/157) found in django-parler that we just resolved. Failing to do this will prevent migrations from applying. TODO: can you provide a link to the issue?
 
 Next, apply the migrations:
 
@@ -486,7 +500,7 @@ Next, apply the migrations:
 
 One of the awesome features of django_parler is that it integrates smoothly with the Django administration site. It includes a `TranslatableAdmin` class that overrides the `ModelAdmin` class provided by Django to manage translations.
 
-Edit *course/admin.py* like so:
+Edit _course/admin.py_ like so:
 
 ```python
 from django.contrib import admin
@@ -511,11 +525,13 @@ For each course, a separate field for each language is now available. Add the di
 
 ![Admin 2](https://github.com/Samuel-2626/django-lang/blob/main/images/admin-2.png)
 
+> Note that we barely scratched the surface on what `django-parler` can achieve for us. Please refer to the [docs](https://django-parler.readthedocs.io/en/stable/index.html) to learn more.
+
 ## Allowing Users to Switch Languages
 
 In this section, we'll show how to allow users the ability to switch between languages from our homepage.
 
-Edit the *index.html* file to like so:
+Edit the _index.html_ file to like so:
 
 ```html
 {% load i18n %}
@@ -535,7 +551,7 @@ Edit the *index.html* file to like so:
         <title>{% trans "TestDriven.io" %}</title>
         <style>
             h1, h3 {
-                color: tomato;
+                color: #266150;
             }
             li {
                 display: inline;
@@ -544,13 +560,16 @@ Edit the *index.html* file to like so:
             }
             a {
                 text-decoration: none;
-                color: brown;
+                color: #DDAF94;
+            }
+            a:hover {
+                color: #4F4846;
             }
             .active {
-                background-color: tomato;
-                padding: 2px;
-                text-align: center;
-                border-radius: 5px;
+                background-color: #266150;
+                padding: 5px;
+                text-align: right;
+                border-radius: 7px;
             }
         </style>
     </head>
@@ -575,21 +594,26 @@ Edit the *index.html* file to like so:
                 </ul>
 
             {% for course in courses %}
-            <h3>
-                {{ course.title }}
-                <em style="font-size: small">{{ course.date }}</em>
-            </h3>
-            <p>{{ course.description }}</p>
-            <strong>
-                Price: $ {{ course.price }}
-            </strong>
+            <div class="card p-4">
+                <h3>
+                    {{ course.title }}
+                    <em style="font-size: small">{{ course.date }}</em>
+                </h3>
+                <p>{{ course.description }}</p>
+                <strong>
+                    Price: $ {{ course.price }}
+                </strong>
+            </div>
+
             <hr />
             {% empty %}
             <p>Database is empty</p>
             {% endfor %}
         </div>
+
     </body>
 </html>
+
 ```
 
 > Make sure that no template tag is split across multiple lines.
@@ -606,13 +630,11 @@ We:
 
 Navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser to see the changes. Switch between the multiple languages and also note how the URL prefix changes for each language.
 
-![Home Page](https://github.com/Samuel-2626/django-lang/blob/main/images/homepage-2.png)
-
 ## Add Locale-Support
 
 Remember how we set `USE_L10N` to `True`? With this, Django will try to use a locale-specific format whenever it outputs a value in a template. Therefore, dates, times, and numbers will be in different formats based on the user's locale.
 
-Navigate back to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser to see the changes and you will notice that the date format changes. Decimal numbers in the English version of your site, are displayed with a dot separator for decimal places, while in the Spanish and French version, they are displayed using a comma. This is due to the differences in locale formats between each of the languages.
+Navigate back to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser to see the changes and you will notice that the date format changes. Decimal numbers in the English version of your site, are displayed with a dot separator for decimal places, while in the Spanish and French versions, they are displayed using a comma. This is due to the differences in locale formats between each of the languages.
 
 ## Conclusion
 

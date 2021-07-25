@@ -15,7 +15,7 @@
         <title>{% trans "TestDriven.io" %}</title>
         <style>
             h1, h3 {
-                color: tomato;
+                color: #266150;
             }
             li {
                 display: inline;
@@ -24,13 +24,16 @@
             }
             a {
                 text-decoration: none;
-                color: brown;
+                color: #DDAF94;
+            }
+            a:hover {
+                color: #4F4846;
             }
             .active {
-                background-color: tomato;
-                padding: 2px;
-                text-align: center;
-                border-radius: 5px;
+                background-color: #266150;
+                padding: 5px;
+                text-align: right;
+                border-radius: 7px;
             }
         </style>
     </head>
@@ -55,18 +58,22 @@
                 </ul>
 
             {% for course in courses %}
-            <h3>
-                {{ course.title }}
-                <em style="font-size: small">{{ course.date }}</em>
-            </h3>
-            <p>{{ course.description }}</p>
-            <strong>
-                Price: $ {{ course.price }}
-            </strong>
+            <div class="card p-4">
+                <h3>
+                    {{ course.title }}
+                    <em style="font-size: small">{{ course.date }}</em>
+                </h3>
+                <p>{{ course.description }}</p>
+                <strong>
+                    Price: $ {{ course.price }}
+                </strong>
+            </div>
+            
             <hr />
             {% empty %}
             <p>Database is empty</p>
             {% endfor %}
         </div>
+
     </body>
 </html>
