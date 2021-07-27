@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-27 23:24+0100\n"
-"PO-Revision-Date: 2021-07-25 22:39+0100\n"
+"PO-Revision-Date: 2021-07-27 23:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -28,19 +28,19 @@ msgstr ""
 
 #: .\course\templates\index.html:48
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #: .\django_lang\settings.py:123
 msgid "English"
-msgstr ""
+msgstr "Inglés"
 
 #: .\django_lang\settings.py:124
 msgid "French"
-msgstr ""
+msgstr "Francés"
 
 #: .\django_lang\settings.py:125
 msgid "Spanish"
-msgstr ""
+msgstr "Español"
 
 #: .\django_lang\urls.py:7
 msgid "admin/"
