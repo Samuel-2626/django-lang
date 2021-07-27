@@ -636,6 +636,8 @@ Remember how we set `USE_L10N` to `True`? With this, Django will try to use a lo
 
 Navigate back to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser to see the changes and you will notice that the date format changes. Decimal numbers in the English version of your site, are displayed with a dot separator for decimal places, while in the Spanish and French versions, they are displayed using a comma. This is due to the differences in locale formats between each of the languages.
 
+![Home Page 2](https://github.com/Samuel-2626/django-lang/blob/main/images/homepage2.png)
+
 ## Conclusion
 
 In this tutorial, you learned about internationalization and localization. How to make strings for translation. We also used third-party packages like Rosetta to make updating and compiling message files easy and django-parler to translate our models.
