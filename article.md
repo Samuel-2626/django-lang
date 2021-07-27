@@ -577,16 +577,16 @@ Edit the _index.html_ file to like so:
         <div class="container">
             <h1>{% trans "TestDriven.io Courses" %}</h1>
 
-            {% get_current_language as LANGUAGE_CODE %}
-            {% get_available_languages as LANGUAGES %}
-            {% get_language_info_list for LANGUAGES as languages %}
+            {% get_current_language as CURRENT_LANGUAGE %}
+            {% get_available_languages as AVAILABLE_LANGUAGES %}
+            {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
             <div class="languages">
                 <p>{% trans "Language" %}:</p>
                 <ul class="languages">
                 {% for language in languages %}
                     <li>
                     <a href="/{{ language.code }}/"
-                    {% if language.code == LANGUAGE_CODE %} class="active"{% endif %}>
+                    {% if language.code == CURRENT_LANGUAGE %} class="active"{% endif %}>
                         {{ language.name_local }}
                     </a>
                     </li>
@@ -622,11 +622,11 @@ Edit the _index.html_ file to like so:
 
 We:
 
-1. Loaded the internationalization tags using `{% load i18n %}`
-1. Used the `{% get_current_language %}` tag to retrieve the current language.
-1. Also obtained the languages defined in the `LANGUAGES` setting via the `{% get_available_languages %}` template tag.
-1. Then used the tag `{% get_language_info_list %}` to enable you with easy access to the language attributes.
-1. Finally, we built an HTML list to display all available languages and added an active class attribute to the currently active language to highlight the active language.
+1. loaded the internationalization tags using `{% load i18n %}`
+1. retrieved the current language using `{% get_current_language %}` tag
+1. also obtained the available languages defined in the `LANGUAGES` setting via the `{% get_available_languages %}` template tag
+1. then used the tag `{% get_language_info_list %}` to enable you with the language attributes.
+1. finally, built an HTML list to display all available languages and added an active class attribute to the currently active language to highlight the active language.
 
 Navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser to see the changes. Switch between the multiple languages and also note how the URL prefix changes for each language.
 
