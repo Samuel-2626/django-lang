@@ -69,8 +69,8 @@ In the next section, we'll look briefly at internationalization and localization
 
 Internationalization and localization represent two sides to the same coin. Together, they allow you to deliver your web application's content to different locales:
 
-- Internationalization, represented by i18n (18 is the number of letters between i and n), is the processing of developing your application so that it can be used by different locales. This process is generally handled by developers.
--  Localization, represented by l10n (10 is the number of letters between l and n), on the other hand, is the process of translating your application to a particular language and locale. This is generally handled by translators.
+-   Internationalization, represented by i18n (18 is the number of letters between i and n), is the processing of developing your application so that it can be used by different locales. This process is generally handled by developers.
+-   Localization, represented by l10n (10 is the number of letters between l and n), on the other hand, is the process of translating your application to a particular language and locale. This is generally handled by translators.
 
 > For more, review [Localization vs. Internationalization](https://www.w3.org/International/questions/qa-i18n) from W3C.
 
@@ -243,6 +243,8 @@ locale
 ```
 
 TODO: can you provide a quick summary of what we've accomplished thus far?
+
+You have covered a lot, let's recap before moving on to other concepts. Recall that the goal of this tutorial is to teach you how to add multiple language support to your Django project. In the first section, you set up the project and showed you what you will be building for this tutorial. You then learnt the difference between internationalization and localization. You also learnt how the Django internationalization framework works under the hood and finally, you prepped your project to allow multiple language support and saw it in action.
 
 --
 
@@ -511,7 +513,7 @@ For each course, a separate field for each language is now available. Add the di
 
 ![Admin 2](https://github.com/Samuel-2626/django-lang/blob/main/images/admin-2.png)
 
-> Note that we barely scratched the surface on what `django-parler` can achieve for us. Please refer to the [docs](https://django-parler.readthedocs.io/en/stable/index.html) to learn more.
+> Note that we barely scratched the surface on what `django-parler` can achieve for us. Also, you use `django-parler` on existing fields without loosing original data from your database. Please refer to the [docs](https://django-parler.readthedocs.io/en/stable/index.html) to learn more.
 
 ## Allowing Users to Switch Languages
 
