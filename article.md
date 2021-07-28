@@ -69,18 +69,14 @@ In the next section, we'll look briefly at internationalization and localization
 
 Internationalization and localization represent two sides to the same coin. Together, they allow you to deliver your web application's content to different locales:
 
--   Internationalization, represented by i18n (18 is the number of letters between i and n), is the processing of developing your application so that it can be used by different locales. This process is generally handled by developers.
--   Localization, represented by l10n (10 is the number of letters between l and n), on the other hand, is the process of translating your application to a particular language and locale. This is generally handled by translators.
+- Internationalization, represented by i18n (18 is the number of letters between i and n), is the processing of developing your application so that it can be used by different locales. This process is generally handled by developers.
+-  Localization, represented by l10n (10 is the number of letters between l and n), on the other hand, is the process of translating your application to a particular language and locale. This is generally handled by translators.
 
 > For more, review [Localization vs. Internationalization](https://www.w3.org/International/questions/qa-i18n) from W3C.
 
-Recall that Django using its [internationalization framework](https://github.com/django/django/tree/main/django/utils/translation) has been translated into more than 100 languages:
+Recall that Django using its [internationalization framework](https://github.com/django/django/tree/main/django/utils/translation) has been translated into more than [100](https://docs.djangoproject.com/en/3.2/internals/contributing/) languages:
 
-TODO: can you provide a link to the "internationalization framework"? Done: By the way, I am not too sure if Django is translated to more than 100 languages...curious how you got that fact :)
-
-Through the internationalization framework, we can easily mark strings for translation, both in Python code and in our templates. It makes use of the GNU gettext toolkit to generate and manage a plain text file that represents a language known as the **message file**. The message file ends with `.po` as its extension. Another file is generated for each language once the translation is done which ends with the `.mo` extension. This is known as the compiled translation.
-
-TODO: is the above aside a quote from somewhere? Yes and No, It was from one of my favourite Django books but I did paraphrase and not quote it verbatim. What are your thoughts on this.
+Through the internationalization framework, we can easily mark strings for translation, both in Python code and in our templates. It makes use of the GNU [gettext](https://www.gnu.org/software/gettext/) toolkit to generate and manage a plain text file that represents a language known as the [message file](https://docs.djangoproject.com/en/3.2/topics/i18n/#term-message-file). The message file ends with _.po_ as its extension. Another file is generated for each language once the translation is done, which ends with the _.mo_ extension. This is known as the compiled translation.
 
 Let's start by installing the [gettext](https://www.gnu.org/software/gettext/) toolkit.
 
@@ -220,17 +216,7 @@ Take note of one of the _.po_ message files:
 1. `msgid`: represents the translation string as it appears in the source code.
 1. `msgstr`: represents the language translation, which is empty by default. You will have to supply the actual translation for any given string.
 
-Currently, only the `LANGUAGES` from our _settings.py_ file have been marked for translation. Therefore, for each `msgstr` under the "fr" and "es" directories, enter the French or Spanish equivalent of the word manually, respectively. Or better still, you can use [Poedit](https://poedit.net/) to edit translations. According to Poedit it was built to handle tanslation using gettext (PO). Download and install it.
-
-Next, click on browse files and navigate to each directory for the French and Spanish .po message files:
-
-![Poedit 1](https://github.com/Samuel-2626/django-lang/blob/main/images/poedit_1.png)
-
-Next, double click on each translation after which you can save it. This should automatically update your .po message files.
-
-![Poedit 2](https://github.com/Samuel-2626/django-lang/blob/main/images/poedit_2.png)
-
-TODO: this is a manual process? Found a better way, check above :]
+Currently, only the `LANGUAGES` from our _settings.py_ file have been marked for translation. Therefore, for each `msgstr` under the "fr" and "es" directories, enter the French or Spanish equivalent of the word manually, respectively. You can edit _.po_ files from your regular code editor; however, it's recommended to use an editor designed specifically for _.po_ like [Poedit](https://poedit.net/).
 
 Next, let's compile the messages by running the following commands:
 
@@ -258,11 +244,15 @@ locale
 
 TODO: can you provide a quick summary of what we've accomplished thus far?
 
-**What did we achieve from this section**
+--
 
-You prepped out your Django project for internationalization by adding additional settings to our existing settings.py file. You also create a locale directory where all your files that are marked for translations will reside.
+That's it for this section. We looked at how to:
 
-> The most important point to take away from the section is we need to first make strings for translation using either the gettext_lazy or gettext function, before compiling our translations.
+1. Add internationalization to our Django project
+1. Set the languages that we'd like the project available in
+1. Generate the messages files via `gettext_lazy`
+1. Manually add the translations
+1. Compile the translations
 
 ## Translating Templates, Models, and Forms
 
@@ -325,8 +315,6 @@ Update the _course/templates/index.html_ file to see this in action:
 <!-- # new -->
 <h1>{% "TestDriven.io Courses" %}</h1>
 ```
-
-TODO: did you mean to use `blocktrans` here? Nope as per the usecase for both, what I am translating doesn't have a variable.
 
 Don't forget to add `{% load i18n %}` to the top of the file.
 
@@ -405,7 +393,7 @@ urlpatterns = i18n_patterns(
 
 Run the development server again, and navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser. You will be redirected to the requested URL, with the appropriate language prefix. Take a look at the URL in your browser; it should now look like [http://127.0.0.1:8000/en/](http://127.0.0.1:8000/en/).
 
-> Change the requested URL from `en` to `fr` or to `es` and see as the heading and title changes.
+> Change the requested URL from `en` to either `fr` or `es`. The heading and title should change.
 
 ## Translating Models with django-parler
 
@@ -440,9 +428,7 @@ PARLER_LANGUAGES = {
 }
 ```
 
-Here, you defined the available languages (English, French, Spanish) for `django-parler`. You also specified English as the default language and indicated that `django-parler` should not hide untranslated content.
-
-TODO: what does "hide untranslated content" mean? Maybe provide a link to the docs? This is it from the docs https://django-parler.readthedocs.io/en/stable/configuration.html#parler-languages. Just noticed that it is even the default behaviour in the first place, so I think that it can be remove; thoughts?
+Here, you defined the available languages (English, French, Spanish) for `django-parler`. You also specified English as the default language and indicated that `django-parler` should not [hide untranslated content](https://django-parler.readthedocs.io/en/stable/configuration.html#parler-languages).
 
 **What to know?**
 
@@ -490,7 +476,7 @@ With the following one:
 bases = (parler.models.TranslatableModel, models.Model)
 ```
 
-> There happens to be a minor [issue](https://github.com/django-parler/django-parler/issues/157) found in django-parler that we just resolved. Failing to do this will prevent migrations from applying. TODO: can you provide a link to the issue?
+> There happens to be a minor [issue](https://github.com/django-parler/django-parler/issues/157) found in django-parler that we just resolved. Failing to do this will prevent migrations from applying.
 
 Next, apply the migrations:
 
