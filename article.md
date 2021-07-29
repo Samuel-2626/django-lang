@@ -223,9 +223,18 @@ For example under the fr (french) directory, we could have this:
 ```bash
 msgid "Language"
 msgstr "Langue"
+
+msgid "English"
+msgstr "Anglais"
+
+msgid "French"
+msgstr "Français"
+
+msgid "Spanish"
+msgstr "Espagnol"
 ```
 
-Do the rest for the remaining instances before proceeding.
+Before proceeding, apply the Spanish translations (you can follow the same format as shown above).
 
 Next, let's compile the messages by running the following commands:
 
@@ -334,6 +343,16 @@ Don't forget to add `{% load i18n %}` to the top of the file.
 ```
 
 Fill in the following `msgstr` translations again and then compile the messages
+
+```bash
+msgid "TestDriven.io Courses"
+msgstr "TestDriven.io Cours" # French translation
+```
+
+```bash
+msgid "TestDriven.io Courses"
+msgstr "TestDriven.io cursos" # Spanish translation
+```
 
 ```bash
 (env)$ django-admin compilemessages

@@ -24,7 +24,7 @@ msgstr ""
 
 #: .\course\templates\index.html:42
 msgid "TestDriven.io Courses"
-msgstr ""
+msgstr "TestDriven.io Cours"
 
 #: .\course\templates\index.html:48
 msgid "Language"
