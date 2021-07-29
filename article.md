@@ -218,6 +218,15 @@ Take note of one of the _.po_ message files:
 
 Currently, only the `LANGUAGES` from our _settings.py_ file have been marked for translation. Therefore, for each `msgstr` under the "fr" and "es" directories, enter the French or Spanish equivalent of the word manually, respectively. You can edit _.po_ files from your regular code editor; however, it's recommended to use an editor designed specifically for _.po_ like [Poedit](https://poedit.net/).
 
+For example under the fr (french) directory, we could have this:
+
+```bash
+msgid "Language"
+msgstr "Langue"
+```
+
+Do the rest for the remaining instances before proceeding.
+
 Next, let's compile the messages by running the following commands:
 
 ```bash
