@@ -1,4 +1,4 @@
-## django-language
+## django-lang
 
 ### Want to learn how to add multiple language support to your Django project
 
